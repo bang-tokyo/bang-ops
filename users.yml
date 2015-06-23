@@ -1,9 +1,0 @@
-- hosts: bang-gw01
-  sudo: true
-  tasks:
-    - user: name=tanarky password=$1$bang$aeXi7Wc3UoSUhyFkGk8Gp/ shell=/bin/bash state=present append=yes groups=sudo
-    - authorized_key: user=tanarky key="{{ lookup('file', './users/tanarky.pub') }}"
-    - user: name=shiruco password=$1$bang$CIPzXSWJMLcqxLrZr04MN0 shell=/bin/bash state=present append=yes groups=sudo
-    - authorized_key: user=shiruco key="{{ lookup('file', './users/shiruco.pub') }}"
-    - user: name=yoshinbo password=$1$bang$6o.9G6TJaG1o5k3COpyRg0 shell=/bin/bash state=present append=yes groups=sudo
-    - authorized_key: user=yoshinbo key="{{ lookup('file', './users/yoshinbo.pub') }}"

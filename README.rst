@@ -11,6 +11,7 @@ $HOME/.ssh/config の設定方法は別途slackなどで確認のこと
 ::
    
    ansible-playbook -i hosts users.yml --ask-sudo-pass
+   git submodule add git@github.com:zzet/ansible-rbenv-role.git roles/rbenv
 
 users.yml内のパスワード部分は以下のコマンドで出力される文字列を使用すること
 

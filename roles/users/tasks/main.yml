@@ -1,0 +1,20 @@
+- name: add users
+  user: name="{{item.n}}" password="{{item.p}}" shell=/bin/bash state=present append=yes groups=sudo
+  with_items:
+    - { n: 'tanarky',  p: '$1$bang$aeXi7Wc3UoSUhyFkGk8Gp/' }
+    - { n: 'shiruco',  p: '$1$bang$CIPzXSWJMLcqxLrZr04MN0' }
+    - { n: 'yoshinbo', p: '$1$bang$6o.9G6TJaG1o5k3COpyRg0' }
+
+- name: add app user
+  user: name=bang shell=/bin/bash state=present append=yes
+
+- authorized_key: user=tanarky key="{{ lookup('file',  'tanarky.pub') }}"
+- authorized_key: user=shiruco key="{{ lookup('file',  'shiruco.pub') }}"
+- authorized_key: user=yoshinbo key="{{ lookup('file', 'yoshinbo.pub') }}"
+
+- name: add app user
+  authorized_key: user=bang key="{{ item }}"
+  with_file:
+    - tanarky.pub
+    - shiruco.pub
+    - yoshinbo.pub
