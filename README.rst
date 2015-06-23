@@ -1,9 +1,12 @@
 環境構築
 -------------------------
 
+submoduleを使っているため、clone後にsubmodule情報取得する必要あり
+
 ::
 
    git clone git@github.com:bang-tokyo/bang-ops.git
+   git submodule update --init --recursive
 
 接続先設定
 -------------------------
