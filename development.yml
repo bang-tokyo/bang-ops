@@ -1,4 +1,4 @@
-- hosts: staging
+- hosts: dev
   sudo: true
   vars:
     rbenv:

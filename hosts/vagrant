@@ -1,0 +1,7 @@
+[dev]
+192.168.33.10
+
+[dev:vars]
+dbuser=bang_w
+dbpassword=bang_w
+dbname=bang_development

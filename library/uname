@@ -1,0 +1,9 @@
+#!env python
+
+import json
+import subprocess
+import sys
+
+ret = {"uname": subprocess.check_output(['uname','-a']).rstrip(),
+       "args": sys.argv}
+print(json.dumps(ret))
