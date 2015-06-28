@@ -2,3 +2,11 @@
   apt: pkg="{{item}}" state=present
   with_items:
     - mysql-client
+    - libmysqld-dev
+
+- name: Install Bundler
+  sudo_user: root
+  command: bash -lc "/usr/local/rbenv/shims/gem install bundler && /usr/local/rbenv/bin/rbenv rehash"
+
+- name: 'create rails app dir'
+  file: path=/var/www state=directory owner=bang group=bang mode=0755

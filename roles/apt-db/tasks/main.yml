@@ -2,4 +2,18 @@
   apt: pkg="{{item}}" state=present
   with_items:
     - mysql-server
+    - python-mysqldb
     - tree
+  tags: mysqld
+
+- name: Create database
+  mysql_db: db={{ dbname }} state=present encoding=utf8mb4
+  tags: mysqld
+
+- name: Create database user
+  mysql_user: >-
+    name={{ dbuser }}
+    password="{{ dbpassword }}"
+    priv={{ dbname }}.*:ALL
+    state=present
+  tags: mysqld
