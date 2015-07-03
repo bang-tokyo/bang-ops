@@ -5,3 +5,4 @@
 dbuser=bang_w
 dbpassword=bang_w
 dbname=bang_development
+my_conf_file=../files/my.conf.dev

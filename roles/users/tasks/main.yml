@@ -1,3 +1,7 @@
+- name: apt update
+  sudo_user: root
+  command: bash -lc "apt-get update"
+
 - name: add users
   user: name="{{item.n}}" password="{{item.p}}" shell=/bin/bash state=present append=yes groups=sudo
   with_items:

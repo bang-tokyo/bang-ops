@@ -1,0 +1,8 @@
+- name: 'install apt db packages'
+  apt: pkg="{{item}}" state=present
+  with_items:
+    - zsh
+    - tree
+    - emacs24-nox
+    - imagemagick
+
