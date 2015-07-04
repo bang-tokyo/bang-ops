@@ -1,3 +1,6 @@
+- name: "mkdir datadir"
+  file: dest=/data state=directory mode=0755
+
 - name: 'install apt db packages'
   apt: pkg="{{item}}" state=present
   with_items:
@@ -5,13 +8,20 @@
     - python-mysqldb
   tags: mysqld
 
-- name: set my.conf to db server
-  template: src={{ my_conf_file }} dest=/etc/mysql/conf.d/charset.cnf owner=root mode=0644
-  register: my_conf
+- name: "mkdir mysql datadir"
+  file: dest=/data/mysql state=directory mode=0755 owner=mysql
 
+- name: set charset.cnf to db server
+  template: src={{ charset_cnf }} dest=/etc/mysql/conf.d/charset.cnf owner=mysql mode=0644
+  register: charset_cnf
+
+- name: "disable apparmor mysql"
+  sudo_user: root
+  command: bash -lc "ln -sf /etc/apparmor.d/usr.sbin.mysqld /etc/apparmor.d/disable/usr.sbin.mysqld && sudo service apparmor restart"
+  
 - name: restart mysql
   service: name=mysql state=restarted
-  when: my_conf.changed
+  when: charset_cnf.changed
 
 - name: Create database
   mysql_db: db={{ dbname }} state=present encoding=utf8mb4

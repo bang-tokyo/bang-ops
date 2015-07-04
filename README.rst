@@ -78,18 +78,38 @@ ansible memo
    ansible -i hosts bang-gw01 -a "echo 'clear root identity'"
 
 - my.cnf
+- mysql datadir
+- mysql_install_dbを何回も起動してOK？
+- mysql 5.6
 - ansible-vault
-- ImageMagick
-- 開発ルール
+- 何をtasks/handlers/playbookにするか
 
-  - vm内でgit cloneして、vmにsshして開発する
-  - 反映もvmから = .ssh/configが必要
+  - dev_mine
+  - dev_web
 
-- いらないこと
+    - nginx
+    - rbenv
 
-  - apache install
+  - dev_db
 
-- 疑問
+    - mysql
 
-  - nodejsは何のため？
+  - prod_alpha
+  - prod_beta
+  - prod_db
+  - prod_web
 
+Done
+---------------------
+
+- 疑問: nodejsは何のため？ -> 今は使ってない
+- 開発ルール: vm内でgit cloneして、vmにsshして開発する
+
+
+
+
+
+
+
+
+    
