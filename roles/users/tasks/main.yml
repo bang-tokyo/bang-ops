@@ -2,8 +2,22 @@
   sudo_user: root
   command: bash -lc "apt-get update"
 
+- name: 'install apt packages'
+  apt: pkg="{{item}}" state=present
+  with_items:
+    - language-pack-ja
+
+- name: locale update
+  sudo_user: root
+  command: bash -lc "update-locale LANG=ja_JP.UTF-8"
+
 - name: add users
-  user: name="{{item.n}}" password="{{item.p}}" shell=/bin/bash state=present append=yes groups=sudo
+  user: name="{{item.n}}"
+        password="{{item.p}}"
+        shell=/bin/bash
+        state=present
+        append=yes
+        groups=sudo
   with_items:
     - { n: 'tanarky',  p: '$1$bang$aeXi7Wc3UoSUhyFkGk8Gp/' }
     - { n: 'shiruco',  p: '$1$bang$CIPzXSWJMLcqxLrZr04MN0' }
@@ -22,3 +36,17 @@
     - tanarky.pub
     - shiruco.pub
     - yoshinbo.pub
+
+- name: Set timezone variables
+#  copy: content='Etc/UTC'
+  copy: content="{{ timezone }}"
+        dest=/etc/timezone
+        owner=root
+        group=root
+        mode=0644
+        backup=yes
+  register: timezone
+
+- name: update timezone
+  command: dpkg-reconfigure --frontend noninteractive tzdata
+  when: timezone.changed

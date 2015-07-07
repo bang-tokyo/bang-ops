@@ -23,23 +23,27 @@
   sudo_user: root
   command: bash -lc "mysql_install_db --basedir=/usr --datadir=/data/mysql"
 
+- name: "set my.cnf to db server"
+  template: src="{{ db_my_cnf }}" dest=/etc/mysql/my.cnf owner=mysql mode=0644
+  register: my_cnf
+
 - name: "set charset.cnf to db server"
-  template: src={{ charset_cnf }} dest=/etc/mysql/conf.d/charset.cnf owner=mysql mode=0644
+  template: src={{ db_charset_cnf }} dest=/etc/mysql/conf.d/charset.cnf owner=mysql mode=0644
   register: charset_cnf
 
 - name: "restart mysql"
   service: name=mysql state=restarted
-  when: charset_cnf.changed
+  when: my_cnf.changed or charset_cnf.changed
 
 - name: "create database"
-  mysql_db: db={{ dbname }} state=present encoding=utf8mb4
+  mysql_db: db={{ db_name }} state=present encoding=utf8mb4
   tags: mysqld
 
 - name: "create database user"
   mysql_user: >-
-    name={{ dbuser }}
-    password="{{ dbpassword }}"
-    priv={{ dbname }}.*:ALL
+    name={{ db_user }}
+    password="{{ db_password }}"
+    priv={{ db_name }}.*:ALL
     state=present
   tags: mysqld
 

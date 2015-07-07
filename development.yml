@@ -5,9 +5,15 @@
       env: system
       version: v0.4.0
       ruby_version: 2.1.5
+    timezone: Asia/Tokyo
+    db_user: bang_w
+    db_password: bang_w
+    db_name: bang_development
+    db_my_cnf: ../files/my.cnf
+    db_charset_cnf: ../files/charset.cnf.dev
   roles:
-    - users
+    - {role: users,    tags: ['init']}
     - {role: apt-util, tags: ['apt-util']}
     - {role: apt-db,   tags: ['apt-db']}
-    - rbenv
-    - apt-web
+    - {role: rbenv,    tags: ['rbenv']}
+    - {role: apt-web,  tags: ['apt-web']}
