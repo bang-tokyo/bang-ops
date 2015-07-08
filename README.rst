@@ -1,5 +1,5 @@
-環境構築
--------------------------
+1. ops環境構築
+-------------------------------
 
 submoduleを使っているため、clone後にsubmodule情報取得する必要あり
 
@@ -8,8 +8,8 @@ submoduleを使っているため、clone後にsubmodule情報取得する必要
    git clone git@github.com:bang-tokyo/bang-ops.git
    git submodule update --init --recursive
 
-bang-server開発環境構築
--------------------------
+2. bang-server開発環境構築
+-------------------------------
 
 ::
 
@@ -23,23 +23,56 @@ bang-server開発環境構築
    # 2回目以降($USERは自分のユーザ、ssh-configに記載あれば指定の必要なし)
    ansible-playbook -i hosts/vagrant development.yml --ask-sudo-pass --user=$USER 
 
-接続先設定
+3. VM接続先設定
 -------------------------
 
-$HOME/.ssh/config の設定方法は別途slackなどで確認のこと
+$HOME/.ssh/config 例
 
-ユーザ作成方法
--------------------------
-
-以下のコマンドでユーザ作成を行うことができる
+$(USERNAME)は自分のものに置き換える
 
 ::
+
+   Host 192.168.33.*
+   HostName %h
+   User $(USERNAME)
+   StrictHostKeyChecking no
+   UserKnownHostsFile /dev/null
    
-   # 本番環境の全台に実行する
-   ansible-playbook -i hosts init.yml --ask-sudo-pass
+   Host bang-dev01
+   HostName 192.168.33.10
+   
+   Host bang-dev*
+   StrictHostKeyChecking no
+   UserKnownHostsFile /dev/null
+   
+   Host bang-*
+   User $(USERNAME)
+   StrictHostKeyChecking no
+   UserKnownHostsFile /dev/null
+   
+   Host *
+   ForwardAgent yes
+
+Macの /etc/hosts に以下の1行追加
+
+::
+
+   192.168.33.10  api.localhost.local
+   
+上記設定をした上で
+
+::
+
+   ssh bang-dev01
+
+とすればログインできるはず。
+後は VMにsshして、VM内で git cloneして好きに開発する
+
+本番サーバの $HOME/.ssh/config の設定方法は別途slackなどで確認のこと
+
 
 パスワード文字列確認方法
--------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ::
    
@@ -99,11 +132,7 @@ ansible memo
   - prod_db
   - prod_web
 
-Done
----------------------
 
-- 疑問: nodejsは何のため？ -> 今は使ってない
-- 開発ルール: vm内でgit cloneして、vmにsshして開発する
 
 
 
