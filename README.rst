@@ -33,25 +33,25 @@ $(USERNAME)は自分のものに置き換える
 ::
 
    Host 192.168.33.*
-   HostName %h
-   User $(USERNAME)
-   StrictHostKeyChecking no
-   UserKnownHostsFile /dev/null
+     HostName %h
+     User $(USERNAME)
+     StrictHostKeyChecking no
+     UserKnownHostsFile /dev/null
    
    Host bang-dev01
-   HostName 192.168.33.10
+     HostName 192.168.33.10
    
    Host bang-dev*
-   StrictHostKeyChecking no
-   UserKnownHostsFile /dev/null
+     StrictHostKeyChecking no
+     UserKnownHostsFile /dev/null
    
    Host bang-*
-   User $(USERNAME)
-   StrictHostKeyChecking no
-   UserKnownHostsFile /dev/null
+     User $(USERNAME)
+     StrictHostKeyChecking no
+     UserKnownHostsFile /dev/null
    
    Host *
-   ForwardAgent yes
+     ForwardAgent yes
 
 Macの /etc/hosts に以下の1行追加
 
