@@ -40,15 +40,11 @@ $(USERNAME)は自分のものに置き換える
    
    Host bang-dev01
      HostName 192.168.33.10
-   
-   Host bang-dev*
      StrictHostKeyChecking no
      UserKnownHostsFile /dev/null
    
    Host bang-*
      User $(USERNAME)
-     StrictHostKeyChecking no
-     UserKnownHostsFile /dev/null
    
    Host *
      ForwardAgent yes
