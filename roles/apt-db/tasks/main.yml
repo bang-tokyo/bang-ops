@@ -19,9 +19,15 @@
   sudo_user: root
   command: bash -lc "ln -fs /etc/mysql/my.cnf /usr/share/mysql/my-default.cnf"
 
+- name: "check if already installed mysql"
+  sudo_user: root
+  stat: path=/data/mysql/mysql
+  register: mysql_already_installed
+
 - name: "mysql_install_db"
   sudo_user: root
-  command: bash -lc "mysql_install_db --basedir=/usr --datadir=/data/mysql"
+  command: bash -lc "mysql_install_db --datadir=/data/mysql"
+  when: mysql_already_installed.stat.exists == False
 
 - name: "set my.cnf to db server"
   template: src="{{ db_my_cnf }}" dest=/etc/mysql/my.cnf owner=mysql mode=0644
