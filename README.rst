@@ -1,4 +1,4 @@
-1. ops環境構築
+1. bang-ops 環境構築
 -------------------------------
 
 ::
@@ -60,3 +60,14 @@ $(USERNAME)は自分のものに置き換える
 後は VM内で git clone して好きに開発する
 
 本番サーバの $HOME/.ssh/config の設定方法は別途slackなどで確認のこと
+
+3. bang-server staging環境構築
+-------------------------------
+
+::
+
+   # 初回実行
+   ansible-playbook -i hosts/idcf staging.yml --user=root --private-key=path/to/key
+
+   # 2回目以降
+   ansible-playbook -i hosts/idcf staging.yml --ask-sudo-pass
