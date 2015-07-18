@@ -3,8 +3,3 @@ bang-gw01
 
 [staging]
 bang-gw01
-
-[staging:vars]
-dbuser=bang_w
-dbpassword=bang_w_password
-dbname=bang_staging

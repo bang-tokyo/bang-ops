@@ -1,8 +1,11 @@
 - name: 'install apt db packages'
   apt: pkg="{{item}}" state=present
   with_items:
-    - zsh
-    - tree
     - emacs24-nox
-    - imagemagick
 
+- name: add .ssh/config
+  template: src=../files/ssh_config dest=/home/{{ item }}/.ssh/config owner={{ item }} group=users mode=644
+  with_items:
+    - tanarky
+    - shiruco
+    - yoshinbo

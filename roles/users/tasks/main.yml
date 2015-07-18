@@ -37,13 +37,6 @@
     - shiruco.pub
     - yoshinbo.pub
 
-- name: add .ssh/config
-  template: src=../files/ssh_config dest=/home/{{ item }}/.ssh/config owner={{ item }} group=users mode=644
-  with_items:
-    - tanarky
-    - shiruco
-    - yoshinbo
-
 - name: Set timezone variables
 #  copy: content='Etc/UTC'
   copy: content="{{ timezone }}"

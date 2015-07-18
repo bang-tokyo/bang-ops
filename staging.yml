@@ -5,8 +5,14 @@
       env: system
       version: v0.4.0
       ruby_version: 2.1.5
+    timezone: Asia/Tokyo
+    db_user: bang
+    db_password: xU84.VeCmg=4=B.g
+    db_name: bang_staging
+    db_my_cnf: ../files/my.cnf
+    db_charset_cnf: ../files/charset.cnf.dev
   roles:
-    - users
-    - apt-db
-    - rbenv
-    - apt-web
+    - {role: users,      tags: ['init']}
+    - {role: apt-db,     tags: ['apt-db']}
+    - {role: zzet.rbenv, tags: ['rbenv']}
+    - {role: apt-web,    tags: ['apt-web']}

@@ -1,8 +1,11 @@
 - name: 'install apt db packages'
   apt: pkg="{{item}}" state=present
   with_items:
+    - zsh
+    - tree
     - mysql-client-5.6
     - libmysqld-dev
+    - imagemagick
 
 - name: Install Bundler
   sudo_user: root
