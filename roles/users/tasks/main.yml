@@ -50,3 +50,13 @@
 - name: update timezone
   command: dpkg-reconfigure --frontend noninteractive tzdata
   when: timezone.changed
+
+- name: "check if exist /root/.ssh/authorized_keys"
+  sudo_user: root
+  stat: path=/root/.ssh/authorized_keys
+  register: root_authorized_keys
+
+- name: delete root authorized_keys
+  sudo_user: root
+  command: bash -lc 'rm /root/.ssh/authorized_keys'
+  when: root_authorized_keys.stat.exists == True

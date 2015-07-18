@@ -1,3 +1,0 @@
-[submodule "roles/rbenv"]
-	path = roles/rbenv
-	url = git@github.com:zzet/ansible-rbenv-role.git

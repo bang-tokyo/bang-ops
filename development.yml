@@ -12,8 +12,8 @@
     db_my_cnf: ../files/my.cnf
     db_charset_cnf: ../files/charset.cnf.dev
   roles:
-    - {role: users,    tags: ['init']}
-    - {role: apt-util, tags: ['apt-util']}
-    - {role: apt-db,   tags: ['apt-db']}
-    - {role: rbenv,    tags: ['rbenv']}
-    - {role: apt-web,  tags: ['apt-web']}
+    - {role: users,      tags: ['init']}
+    - {role: apt-util,   tags: ['apt-util']}
+    - {role: apt-db,     tags: ['apt-db']}
+    - {role: zzet.rbenv, tags: ['rbenv']}
+    - {role: apt-web,    tags: ['apt-web']}
