@@ -1,0 +1,11 @@
+Host bang-gw01
+  HostName 210.140.64.146
+  Port 52022
+
+Host bang-dev01
+  HostName 192.168.33.10
+  StrictHostKeyChecking no
+  UserKnownHostsFile /dev/null
+
+Host bang-*
+  User {{ item }}
